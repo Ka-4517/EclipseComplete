@@ -1,0 +1,18 @@
+package com.paractice_Java;
+
+public class PrintWithoutSOP {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		public static void main(String args[])
+	    {
+	 
+	        // Using if statement to
+	        // print hello world
+	        if (System.out.printf("Hello World") == null) {
+	        }
+	    }
+
+	}
+
+}

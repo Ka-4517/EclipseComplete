@@ -1,0 +1,38 @@
+package com.Cadena;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
+public class GetAllUserAPI {
+	private String authToken;
+
+	public GetAllUserAPI() {
+		authToken = "e1112dbda87ebee32612c1f2cad28ffd5dca316a";
+	}// This defines the GetAPI class and initializes a private authToken variable
+		// with the specified token value in the constructor.
+
+	@Test
+	public void testGetUsers() {
+		Response response = RestAssured.given().header("Authorization", "Token " + authToken)
+				.get("http://cadenabackend.iworklab.com/api/v1/users/");
+		System.out.println(response.statusCode());// This prints the HTTP status code of the response to the console.
+													// For example, if the server returned a 200 OK status, this would
+													// print 200.
+		System.out.println(response.asString());// This prints the body of the response as a string to the console. This
+												// is useful for debugging purposes and can be used to verify that the
+												// expected response was returned from the server.
+		System.out.println(response.getBody().asString());// This is the same as the previous statement and prints the
+															// body of the response as a string to the console.
+		System.out.println(response.statusLine());// This prints the status line of the response to the console. The
+													// status line includes the HTTP version, status code, and reason
+													// phrase. For example, if the server returned a 200 OK status, this
+													// might print something like HTTP/1.1 200 OK.
+
+		int statusCode = response.getStatusCode();
+		Assert.assertEquals(statusCode, 200);
+	}
+
+}

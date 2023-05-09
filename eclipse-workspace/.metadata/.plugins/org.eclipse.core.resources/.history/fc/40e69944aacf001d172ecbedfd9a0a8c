@@ -1,0 +1,92 @@
+package com.Cadena;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.http.Header;
+import io.restassured.response.Response;
+
+public class GetAllusersWithMultipleTestcases {
+	private String authToken;// = "e1112dbda87ebee32612c1f2cad28ffd5dca316a";
+	
+
+	public GetAllusersWithMultipleTestcases() {
+		authToken = "e1112dbda87ebee32612c1f2cad28ffd5dca316a";
+	}
+
+	@Test
+	public void testGetUsers() {
+		Response response = RestAssured
+				.given()
+				
+				.header("Authorization", "Token " + authToken)
+				
+				.get("http://cadenabackend.iworklab.com/api/v1/users/");
+		System.out.println(response.statusCode());
+		System.out.println(response.asString());
+		System.out.println(response.getBody().asString());
+		System.out.println(response.statusLine());
+
+		int statusCode = response.getStatusCode();
+		Assert.assertEquals(statusCode, 200);	
+	}
+
+	@Test
+	public void testGetUsersWithMultipleHeaders() {
+	    Map<String, String> headers = new HashMap<String, String>();
+	    headers.put("Authorization", "Token " + authToken);
+	    headers.put("Accept", "application/json");
+
+	    Response response = RestAssured.given()
+	        .headers(headers)
+	        .get("http://cadenabackend.iworklab.com/api/v1/users/");
+
+	    System.out.println(response.statusCode());
+
+	    int statusCode = response.getStatusCode();
+	    Assert.assertEquals(statusCode, 200);
+	
+	}
+	
+	@Test
+	public void testGetUserById() {
+		Response response = RestAssured.given().header("Authorization", "Token " + authToken)
+				.get("http://cadenabackend.iworklab.com/api/v1/users/1/");
+	
+		System.out.println(response.asString());
+	
+		int statusCode = response.getStatusCode();
+		Assert.assertEquals(statusCode, 200);
+		Assert.assertTrue(response.getBody().asString().contains("SunilRSaini"));
+	}
+
+	@Test
+	public void testGetUserByIdWithKeyValues() {
+		Response response = RestAssured.given().header("Authorization", "Token " + authToken)
+				.get("http://cadenabackend.iworklab.com/api/v1/users/1/");
+	
+		int statusCode = response.getStatusCode();
+		Assert.assertEquals(statusCode, 200);
+		Assert.assertEquals(response.jsonPath().get("username"), "SunilRSaini");
+		Assert.assertEquals(response.jsonPath().get("email"), "sunil.saini@mail.vinove.com");
+	}
+	@Test
+	public void ErrorStatusCode() {
+		Response response = RestAssured.given().header("Authorization", "Token " + authToken)
+				.get("http://cadenabackend.iworklab.com/api/v1/users/1/");
+	
+		int statusCode = response.getStatusCode();
+		
+		Assert.assertNotEquals(statusCode, 400 ,"Failed");
+		Assert.assertNotEquals(statusCode, 500 , "Failed");
+		System.out.println(Assert.assertEquals(statusCode, 200 , " This API")));
+		(Assert.assertEquals(statusCode, 200 , " This API"));
+		
+		
+	}
+
+}

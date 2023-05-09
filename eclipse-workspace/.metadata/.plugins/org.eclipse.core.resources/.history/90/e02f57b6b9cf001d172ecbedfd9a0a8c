@@ -1,0 +1,45 @@
+package com.Cadena;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.testng.annotations.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
+public class GetAllProspectAPI{
+
+	    private String token = "e1112dbda87ebee32612c1f2cad28ffd5dca316a";
+        private String url = "http://cadenabackend.iworklab.com/api/v1/prospect/";
+        
+	    @Test
+	    public void testGetProspects() {
+	        Response response = RestAssured.given()
+	                .header("Authorization", "Token " + token)
+	                .get(url);
+
+	        int statusCode = response.getStatusCode();
+	        String body = response.getBody().asString();
+
+	        System.out.println("Status code: " + statusCode);
+	        System.out.println("Response body: " + body);
+	    }
+	    
+	    @Test
+	    public void testGetProspects1() {
+	        Response response = RestAssured.given()
+	                .header("Authorization", "Token " + token)
+	                .get(url);
+
+	        int statusCode = response.getStatusCode();
+	        String body = response.getBody().asString();
+
+	        JSONObject jsonObject = new JSONObject(body.toString());
+	        JSONArray jsonArray = jsonObject.getJSONArray("id");
+
+	        int count = jsonArray.length();
+	        System.out.println("Number of IDs: " + count);
+	    }
+	}
+
+

@@ -1,0 +1,27 @@
+package com.Cadena;
+
+import org.testng.annotations.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
+public class GetAllSubscriptionAPI{
+
+	    private String token = "e1112dbda87ebee32612c1f2cad28ffd5dca316a";
+        private String url = "http://cadenabackend.iworklab.com/api/v1/prospect/";
+        
+	    @Test
+	    public void testGetProspects() {
+	        Response response = RestAssured.given()
+	                .header("Authorization", "Token " + token)
+	                .get(url);
+
+	        int statusCode = response.getStatusCode();
+	        String body = response.getBody().asString();
+
+	        System.out.println("Status code: " + statusCode);
+	        System.out.println("Response body: " + body);
+	    }
+	}
+
+

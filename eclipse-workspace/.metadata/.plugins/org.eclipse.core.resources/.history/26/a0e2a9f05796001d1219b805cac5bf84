@@ -1,0 +1,31 @@
+package NobelPage;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class IntroPage {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		
+		WebDriverManager.chromedriver().setup();
+		WebDriver driver = new ChromeDriver();		
+		 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			driver.get("https://nobelpagedev.iworklab.com/intro");
+			driver.manage().window().maximize();
+			driver.findElement(By.cssSelector("input[placeholder='Eg: Co-founder of Biliz technologies']")).sendKeys("CEO OF THE VALUECODERS");
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("//span[normalize-space()='+ Add new position']")).click();
+			Thread.sleep(2000);
+			System.out.println(driver.findElement(By.xpath("//h5[normalize-space()='Add Experience']")).getText());
+			
+			
+
+	}
+
+}

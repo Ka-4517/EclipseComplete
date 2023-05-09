@@ -1,0 +1,16 @@
+package com.VC.testng;
+
+import java.io.IOException;
+
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class TestNGExcel {
+public void DataSheet() throws IOException
+{
+	XSSFWorkbook objwb = new XSSFWorkbook("C:/Users/Karan Gupta/eclipse-workspace/TestNGExcel/Excel/Data.xls.et");
+	XSSFSheet objSheet = new XSSFSheet("Data.sheet");
+}
+
+}

@@ -1,0 +1,30 @@
+package com.Cadena;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
+public class GetAllUserAPI {
+	private String authToken;
+
+    public void GetAPI() {
+        authToken = "e1112dbda87ebee32612c1f2cad28ffd5dca316a";
+    }
+
+    @Test
+    public void testGetUsers() {
+        Response response = RestAssured.given()
+                .header("Authorization", "Token " + authToken)
+                .get("http://cadenabackend.iworklab.com/api/v1/users/");
+        System.out.println(response.statusCode());
+        System.out.println(response.asString());
+        System.out.println(response.getBody().asString());
+        System.out.println(response.statusLine());
+
+        int statusCode = response.getStatusCode();
+        Assert.assertEquals(statusCode, 200);
+    }
+
+}

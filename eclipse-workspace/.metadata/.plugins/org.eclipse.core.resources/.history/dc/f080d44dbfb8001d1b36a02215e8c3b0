@@ -1,0 +1,30 @@
+package com.VC.testng;
+
+import java.io.IOException;
+
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class TestNGExcel {
+public static void DataSheet() throws IOException
+{
+	XSSFWorkbook objwb = new XSSFWorkbook("C:/Users/Karan Gupta/eclipse-workspace/TestNGExcel/Excel/Data.xls.et");
+	XSSFSheet objSheet = objwb.getSheet("Sheet1");
+	int rowcount = objSheet.getPhysicalNumberOfRows();
+	System.out.println(rowcount);
+	
+	
+}
+
+public static void CellData() throws IOException
+{
+	XSSFWorkbook objwb = new XSSFWorkbook("C:/Users/Karan Gupta/eclipse-workspace/TestNGExcel/Excel/Data.xls.et");
+	XSSFSheet objSheet = objwb.getSheet("Sheet1");
+	
+	System.out.println(rowcount);
+	
+}
+
+
+}

@@ -1,0 +1,15 @@
+package com.paractice_Java;
+
+public class WithoutUsingMainMethod {
+	 // static block
+     static
+    {
+        // prints "Hello World!!" to the console
+        System.out.println("Hello World!!");
+  
+        // exit from the program
+        System.exit(0);
+    }}
+	
+
+

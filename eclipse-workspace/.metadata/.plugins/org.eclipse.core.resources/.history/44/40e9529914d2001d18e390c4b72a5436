@@ -1,0 +1,9 @@
+package com.paractice_Java;
+
+public class withoutMain {
+	static {
+        System.out.println("Hello World!");
+        System.exit(0);
+    }
+
+}

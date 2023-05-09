@@ -1,0 +1,55 @@
+package com.Cadena;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
+public class GetAllUserAPI {
+	
+	public String authToken "e1112dbda87ebee32612c1f2cad28ffd5dca316a";
+
+	//public GetAllUserAPI() {
+		//authToken = "e1112dbda87ebee32612c1f2cad28ffd5dca316a";
+	//}// This defines the GetAPI class and initializes a private authToken variable
+		// with the specified token value in the constructor.
+
+	@Test
+	public void testGetUsers() {
+		Response response = RestAssured.given().header("Authorization", "Token " + authToken)
+				.get("http://cadenabackend.iworklab.com/api/v1/users/");
+		System.out.println(response.statusCode());// This prints the HTTP status code of the response to the console.
+													// For example, if the server returned a 200 OK status, this would
+													// print 200.
+		System.out.println(response.asString());// This prints the body of the response as a string to the console. This
+												// is useful for debugging purposes and can be used to verify that the
+												// expected response was returned from the server.
+		System.out.println(response.getBody().asString());// This is the same as the previous statement and prints the
+															// body of the response as a string to the console.
+		System.out.println(response.statusLine());// This prints the status line of the response to the console. The
+													// status line includes the HTTP version, status code, and reason
+													// phrase. For example, if the server returned a 200 OK status, this
+													// might print something like HTTP/1.1 200 OK.
+
+		int statusCode = response.getStatusCode();// This line extracts the HTTP status code from the response and
+													// stores it in the statusCode variable. The status code is a
+													// three-digit integer that indicates the status of the HTTP
+													// request. Common status codes include 200 for success, 404 for not
+													// found, and 500 for internal server error.
+		Assert.assertEquals(statusCode,
+				200);/*
+						 * This line uses TestNG's Assert class to check that the statusCode variable
+						 * equals the expected value of 200. The assertEquals method compares two values
+						 * and throws an assertion error if they are not equal. In this case, if the
+						 * HTTP status code is not 200, the test will fail and an assertion error will
+						 * be thrown.
+						 * 
+						 * By checking that the HTTP status code is 200, we can verify that the server
+						 * returned a successful response to our API request. If the status code is not
+						 * 200, it indicates that there was a problem with the request or the server
+						 * encountered an error while processing the request.
+						 */
+	}
+
+}

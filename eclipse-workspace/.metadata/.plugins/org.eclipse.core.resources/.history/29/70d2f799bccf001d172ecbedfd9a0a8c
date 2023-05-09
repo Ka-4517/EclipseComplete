@@ -1,0 +1,59 @@
+package com.Cadena;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.testng.annotations.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
+public class GetAllProspectAPI{
+
+	    private String token = "e1112dbda87ebee32612c1f2cad28ffd5dca316a";
+        private String url = "http://cadenabackend.iworklab.com/api/v1/prospect/";
+        
+        public class ExampleTest {
+            
+            @Test
+            public void testGetProspects() {
+                Response response = RestAssured.given()
+                        .header("Authorization", "Token " + token)
+                        .get(url);
+
+                int statusCode = response.getStatusCode();
+                String body = response.getBody().asString();
+
+                JSONObject jsonObject = new JSONObject(body);
+                JSONArray dataArray = jsonObject.getJSONArray("data");
+
+                int count = dataArray.length();
+                System.out.println("Number of Users: " + count);
+                System.out.println(body);
+                System.out.println("StatusCode is" +statusCode);
+            }
+            @Test
+            public void testGetProspects2() {
+                Response response = RestAssured.given()
+                        .header("Authorization", "Token " + token)
+                        .get(url);
+
+                int statusCode = response.getStatusCode();
+                String body = response.getBody().asString();
+
+                JSONObject jsonObject = new JSONObject(body);
+                JSONArray dataArray = jsonObject.getJSONArray("data");
+
+                int count = 0;
+                for (int i = 0; i < dataArray.length(); i++) {
+                    JSONObject prospect = dataArray.getJSONObject(i);
+                    if (prospect.has("first_name")) {
+                        count++;
+                    }
+                }
+
+                System.out.println("Number of prospects with first_name field: " + count);
+            }
+        }
+	}
+
+
